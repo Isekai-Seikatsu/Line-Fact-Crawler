@@ -11,7 +11,7 @@ url = "https://api-fact-checker.line-apps.com/pub/v1/zhtw/articles/verified?size
 async def fetch_and_filt(session, page):
     print(page)  #
     async with session.get(url.format(page)) as r:
-        # assert await r.status == 200
+        # assert (await r.status) == 200
 
         data = json.loads(await r.text())
         return ([post['id'], post['content'], post['tag']['en'], post['tag']['zhtw']]
