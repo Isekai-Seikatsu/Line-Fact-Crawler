@@ -1,6 +1,6 @@
 import aiohttp
 import asyncio
-
+import uvloop
 import json
 
 import pandas as pd
@@ -31,6 +31,7 @@ async def main():
     global result
     result = await fetch_pages(range(pages))
 
+uvloop.install()
 asyncio.run(main())
 
 
