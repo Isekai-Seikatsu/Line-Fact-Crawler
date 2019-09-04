@@ -3,6 +3,8 @@ import asyncio
 import uvloop
 import json
 
+import requests
+
 import pandas as pd
 
 
@@ -24,12 +26,14 @@ async def fetch_pages(page_range):
         )
         return result
 
-
-pages = 116
-
+def check_pages(url):
+    pages = json.loads(requests.get(url).text)['totalPages']
+    print("pages:", pages)
+    return pages
+    
 async def main():
     global result
-    result = await fetch_pages(range(pages))
+    result = await fetch_pages(range(check_pages(url)))
 
 uvloop.install()
 asyncio.run(main())
